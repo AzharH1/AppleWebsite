@@ -8,6 +8,8 @@ import { Tab } from '@headlessui/react'
 import { fetchProducts } from '@/utils/fetchProducts'
 import category from '@/appleredesign/schemas/documents/category'
 import Product from '@/components/Product'
+import Basket from '@/components/Basket'
+
 
 interface Props {
   categories: Category[];
@@ -15,7 +17,6 @@ interface Props {
 }
 
 const Home = ({categories, products}: Props) => {
-  
   // console.log(products)
   const showProducts = (category: number) => {
     return products
@@ -31,6 +32,7 @@ const Home = ({categories, products}: Props) => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Header />
+      <Basket />
       <main className="relative h-[200vh] bg-[#E7ECEE] ">
         <Landing />
       </main>

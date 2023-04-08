@@ -37,5 +37,6 @@ interface Products {
         _ref: string;
     }
     image: Image[];
-    price: string;
+    price: number;
 }
+
