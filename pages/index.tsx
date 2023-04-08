@@ -5,14 +5,23 @@ import Landing from '@/components/Landing'
 import { GetServerSideProps } from 'next'
 import { fectchCategories } from '@/utils/fetchCategories'
 import { Tab } from '@headlessui/react'
+import { fetchProducts } from '@/utils/fetchProducts'
+import category from '@/appleredesign/schemas/documents/category'
+import Product from '@/components/Product'
 
 interface Props {
   categories: Category[];
+  products: Products[];
 }
 
-
-const Home = ({categories}: Props) => {
-  console.log(categories)
+const Home = ({categories, products}: Props) => {
+  
+  // console.log(products)
+  const showProducts = (category: number) => {
+    return products
+    .filter((product)=> product.category._ref === categories[category]._id)
+    .map(product => (<Product product={product} key={product._id}/>))
+  }
   return (
     <>
       <Head>
@@ -22,7 +31,7 @@ const Home = ({categories}: Props) => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Header />
-      <main className="relative h-[200vh] bg-[#E7ECEE]">
+      <main className="relative h-[200vh] bg-[#E7ECEE] ">
         <Landing />
       </main>
       <section className="relative z-40 -mt-[100vh] min-h-screen bg-[#1B1B1B]">
@@ -49,10 +58,10 @@ const Home = ({categories}: Props) => {
               ))}
             </Tab.List>
             <Tab.Panels className="mx-auto max-w-fit pb-24 pt-10 sm:px-4">
-              {/* <Tab.Panel className="tabPanel">{showProducts(0)}</Tab.Panel>
+              <Tab.Panel className="tabPanel">{showProducts(0)}</Tab.Panel>
               <Tab.Panel className="tabPanel">{showProducts(1)}</Tab.Panel>
               <Tab.Panel className="tabPanel">{showProducts(2)}</Tab.Panel>
-              <Tab.Panel className="tabPanel">{showProducts(3)}</Tab.Panel> */}
+              <Tab.Panel className="tabPanel">{showProducts(3)}</Tab.Panel>
             </Tab.Panels>
           </Tab.Group>
         </div>
@@ -65,10 +74,12 @@ export default Home;
 
 export const getServerSideProps: GetServerSideProps<Props> = async () => {
   const categories = await fectchCategories()
-  
+  const products = await fetchProducts()
+
   return {
     props: {
-      categories
+      categories,
+      products,
     },
   }
 }
