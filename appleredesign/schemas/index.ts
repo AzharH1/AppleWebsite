@@ -2,6 +2,7 @@
 
 import product from './documents/product'
 import category from './documents/category'
+import { user, account } from 'next-auth-sanity/schemas';
 
 
 
@@ -12,4 +13,4 @@ import blockContent from './blocks/blockContent'
 const blocks = [blockContent]
 
 
-export const schemaTypes = [ ...documents, ...blocks]
+export const schemaTypes = [ ...documents, ...blocks, user, account]
