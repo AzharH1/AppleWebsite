@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "install": "npm run install --./package.json && npm run install --./appleredesign/package.json",
+    "install": "npm run install --prefix ./package.json && npm run install --prefix ./appleredesign/package.json",
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
