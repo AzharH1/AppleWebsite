@@ -10,7 +10,7 @@ export default async function handler(
   res: NextApiResponse
 ) {
   if (req.method === "POST") {
-    const items: Product[] = req.body.items;
+    const items: Products[] = req.body.items;
 
     // This is the shape in which stripe expects the data to be
     const transformedItems = items.map((item) => ({
